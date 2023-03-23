@@ -9,16 +9,18 @@ export class NftService {
   constructor(@InjectRepository(NFT) private nftRepo: Repository<NFT>) {}
 
   findAll() {
-    return this.nftRepo.find();
+    return this.nftRepo.find({
+      relations: ['nfts', 'nfts.user'],
+    });
   }
   findAllWithUser() {
     return this.nftRepo.find({
-      relations: ['users'],
+      relations: ['nfts'],
     });
   }
   async findOne(id: number) {
     const nft = await this.nftRepo.findOne({
-      relations: ['users'],
+      relations: ['nfts'],
       where: {
         id,
       },

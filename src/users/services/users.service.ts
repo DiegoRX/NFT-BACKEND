@@ -27,7 +27,12 @@ export class UsersService {
     });
   }
   async findOne(id: number) {
-    const user = await this.userRepo.findOneBy({ id });
+    const user = await this.userRepo.findOne({
+      relations: ['nfts'],
+      where: {
+        id,
+      },
+    });
     if (!user) {
       throw new NotFoundException(`User #${id} not found`);
     }
@@ -62,7 +67,7 @@ export class UsersService {
       const nft = await this.nftRepo.findBy({
         id: In(changes.nftsIds),
       });
-      user.nfts = nft;
+      // user.nfts = nft;
     }
     this.userRepo.merge(user, changes);
     return this.userRepo.save(user);
@@ -80,7 +85,7 @@ export class UsersService {
       },
     });
     const nft = await this.nftRepo.findOneBy({ id: nftId });
-    user.nfts.push(nft);
+    // user.nfts.push(nft);
     return this.userRepo.save(user);
   }
 

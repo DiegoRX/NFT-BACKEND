@@ -8,11 +8,13 @@ import {
   JoinColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 import { Customer } from './customer.entity';
 import { Exclude } from 'class-transformer';
 import { NFT } from './nft.entity';
+import { NFTUnique } from './uniqueNFT.entity';
 
 @Entity()
 export class User {
@@ -22,9 +24,9 @@ export class User {
   email: string;
   @Column({ type: 'varchar', length: 255 })
   name: string;
-  @Column({ type: 'varchar', length: 255 })
-  walletAddress: string;
   @Column({ type: 'varchar', length: 255, unique: true })
+  walletAddress: string;
+  @Column({ type: 'varchar', length: 255 })
   address: string;
   @Column({ type: 'varchar', length: 255 })
   phone: string;
@@ -53,15 +55,6 @@ export class User {
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
-  @ManyToMany(() => NFT, (nft) => nft.users)
-  @JoinTable({
-    name: 'users_has_nfts',
-    joinColumn: {
-      name: 'user_id',
-    },
-    inverseJoinColumn: {
-      name: 'nft_id',
-    },
-  })
-  nfts: NFT[];
+  @OneToMany(() => NFTUnique, (nft) => nft.user)
+  nfts: NFTUnique[];
 }

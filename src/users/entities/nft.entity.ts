@@ -9,9 +9,11 @@ import {
   JoinTable,
   Index,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { User } from 'src/users/entities/user.entity';
+import { NFTUnique } from './uniqueNFT.entity';
 @Entity({ name: 'nft' })
 @Index(['name', 'address'])
 export class NFT {
@@ -50,7 +52,6 @@ export class NFT {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
-
-  @ManyToMany(() => User, (user) => user.nfts)
-  users: User[];
+  @OneToMany(() => NFTUnique, (nftUnique) => nftUnique.nft)
+  nfts: NFTUnique[];
 }

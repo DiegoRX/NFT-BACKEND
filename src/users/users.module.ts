@@ -11,11 +11,19 @@ import { User } from './entities/user.entity';
 import { NftController } from './controllers/nft.controller';
 import { NftService } from './services/nft.service';
 import { NFT } from './entities/nft.entity';
+import { UniqueNftController } from './controllers/unique-nft.controller';
+import { UniqueNftService } from './services/unique-nft.service';
+import { NFTUnique } from './entities/uniqueNFT.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Customer, NFT])],
-  controllers: [CustomerController, UsersController, NftController],
-  providers: [CustomersService, UsersService, NftService],
+  imports: [TypeOrmModule.forFeature([User, Customer, NFT, NFTUnique])],
+  controllers: [
+    CustomerController,
+    UsersController,
+    NftController,
+    UniqueNftController,
+  ],
+  providers: [CustomersService, UsersService, NftService, UniqueNftService],
   exports: [UsersService],
 })
 export class UsersModule {}
