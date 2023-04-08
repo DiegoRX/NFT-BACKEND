@@ -24,13 +24,13 @@ export class UniqueNftService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(tokenId: number) {
     const NFTUnique = await this.NFTUniqueRepo.findOne({
-      relations: ['users', 'nft'],
-      where: { id },
+      relations: ['user', 'nft'],
+      where: { tokenId },
     });
     if (!NFTUnique) {
-      throw new NotFoundException(`Product #${id} not found`);
+      throw new NotFoundException(`Product #${tokenId} not found`);
     }
     return NFTUnique;
   }
@@ -48,8 +48,8 @@ export class UniqueNftService {
     return this.NFTUniqueRepo.save(newNFTUnique);
   }
 
-  async update(id: number, changes: UpdateNFTuniqueDto) {
-    const NFTUnique = await this.NFTUniqueRepo.findOneBy({ id });
+  async update(tokenId: number, changes: UpdateNFTuniqueDto) {
+    const NFTUnique = await this.NFTUniqueRepo.findOneBy({ tokenId });
     if (changes.nftId) {
       const nft = await this.NFTRepo.findOneBy({ id: changes.nftId });
       NFTUnique.nft = nft;
@@ -62,7 +62,7 @@ export class UniqueNftService {
     return this.NFTUniqueRepo.save(NFTUnique);
   }
 
-  remove(id: number) {
-    return this.NFTUniqueRepo.delete(id);
+  remove(tokenId: number) {
+    return this.NFTUniqueRepo.delete(tokenId);
   }
 }

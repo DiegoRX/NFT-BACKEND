@@ -85,7 +85,7 @@ export class UsersService {
       },
     });
     const nft = await this.nftRepo.findOneBy({ id: nftId });
-    // user.nfts.push(nft);
+    this.userRepo.merge(user, nft);
     return this.userRepo.save(user);
   }
 

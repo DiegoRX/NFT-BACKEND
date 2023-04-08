@@ -33,6 +33,10 @@ export class NFT {
   @Column({ type: 'int' })
   price: number;
 
+  @Index()
+  @Column({ type: 'int' })
+  mintedNFT: number;
+
   @Column({ type: 'varchar' })
   image: string;
 

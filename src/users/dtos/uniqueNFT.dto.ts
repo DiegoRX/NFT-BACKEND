@@ -11,11 +11,21 @@ import { PartialType, ApiProperty } from '@nestjs/swagger';
 
 export class CreateNFTuniqueDto {
   @IsString()
-  @ApiProperty({ description: 'NFT address' })
+  @ApiProperty({ description: 'tokenUri' })
+  readonly tokenUri: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ description: 'address' })
   readonly address: string;
 
   @IsPositive()
   @IsNotEmpty()
+  @ApiProperty()
+  readonly tokenId: number;
+
+  @IsPositive()
+  @IsOptional()
   @ApiProperty()
   readonly userId: number;
   @IsPositive()

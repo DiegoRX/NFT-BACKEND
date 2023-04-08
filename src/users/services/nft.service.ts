@@ -18,15 +18,15 @@ export class NftService {
       relations: ['nfts'],
     });
   }
-  async findOne(id: number) {
+  async findOne(name: string) {
     const nft = await this.nftRepo.findOne({
       relations: ['nfts'],
       where: {
-        id,
+        name,
       },
     });
     if (!nft) {
-      throw new NotFoundException(`NFT #${id} not found`);
+      throw new NotFoundException(`NFT ${name} not found`);
     }
     return nft;
   }

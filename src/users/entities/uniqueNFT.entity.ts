@@ -13,10 +13,16 @@ import { NFT } from './nft.entity';
 import { User } from './user.entity';
 
 @Entity({ name: 'uniqueNFT' })
-@Index(['address'])
+@Index(['tokenUri'])
 export class NFTUnique {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: 'varchar', length: 255, unique: true })
+  tokenUri: string;
+
+  @Column({ type: 'int', unique: true })
+  tokenId: number;
 
   @Column({ type: 'varchar', length: 255, unique: true })
   address: string;

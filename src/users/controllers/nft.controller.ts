@@ -33,9 +33,10 @@ export class NftController {
   findAll() {
     return this.NFTService.findAll();
   }
-  @Get(':id')
-  get(@Param('id', ParseIntPipe) id: number) {
-    return this.NFTService.findOne(id);
+  @Public()
+  @Get(':name')
+  get(@Param('name') name: string) {
+    return this.NFTService.findOne(name);
   }
 
   @Post()

@@ -33,6 +33,11 @@ export class CreateNFTDto {
   @ApiProperty()
   readonly price: number;
 
+  @IsNumber()
+  @IsOptional()
+  @ApiProperty()
+  readonly mintedNFT: number;
+
   @IsUrl()
   @IsNotEmpty()
   @ApiProperty()
