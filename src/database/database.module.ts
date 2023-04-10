@@ -16,10 +16,12 @@ const API_KEY_PROD = 'PROD1212121SA';
       useFactory: (configService: ConfigType<typeof config>) => {
         return {
           type: 'postgres',
-          entities: ['dist/**/*.entity{.ts,.js}'],
           url: configService.postgresUrl,
           synchronize: true,
           autoLoadEntities: true,
+          ssl: {
+            rejectUnauthorized: false,
+          },
         };
       },
     }),
@@ -35,6 +37,9 @@ const API_KEY_PROD = 'PROD1212121SA';
         // 👈
         const client = new Client({
           connectionString: configService.postgresUrl,
+          ssl: {
+            rejectUnauthorized: false,
+          },
         });
         client.connect();
         return client;
