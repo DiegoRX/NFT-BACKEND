@@ -1,5 +1,5 @@
 # compiled output
-
+/dist
 /node_modules
 
 # Logs
@@ -36,4 +36,4 @@ lerna-debug.log*
 *.env
 /postgres_data
 /data-b
-
+dist
