@@ -4,6 +4,10 @@ import { DataSource } from 'typeorm';
 const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
+  username: process.env.POSTGRES_USER,
+  database: process.env.POSTGRES_DB,
+  password: process.env.POSTGRES_PASSWORD,
+  port: parseInt(process.env.POSTGRES_PORT),
   synchronize: false,
   logging: false,
   migrations: ['src/database/migrations/*.ts'],
